@@ -112,6 +112,109 @@ static CGFloat const _KKLayoutCellHeightCacheAbsentValue = -1;
 
 @end
 
+@implementation UITableView (KKLayoutCellInvalidateCache)
+
++ (void)load {
+    SEL selectors[] = {
+        @selector(reloadData),
+        @selector(insertSections:withRowAnimation:),
+        @selector(deleteSections:withRowAnimation:),
+        @selector(reloadSections:withRowAnimation:),
+        @selector(moveSection:toSection:),
+        @selector(insertRowsAtIndexPaths:withRowAnimation:),
+        @selector(deleteRowsAtIndexPaths:withRowAnimation:),
+        @selector(reloadRowsAtIndexPaths:withRowAnimation:),
+        @selector(moveRowAtIndexPath:toIndexPath:)
+    };
+    
+    for (NSInteger index = 0; index < sizeof(selectors) / sizeof(SEL); index ++) {
+        SEL originSelector = selectors[index];
+        SEL newSelector = NSSelectorFromString([@"kk_" stringByAppendingString:NSStringFromSelector(originSelector)]);
+        
+        Method originalMethod = class_getInstanceMethod(self, originSelector);
+        Method newMethod = class_getInstanceMethod(self, newSelector);
+        
+        method_exchangeImplementations(originalMethod, newMethod);
+    }
+}
+
+- (void)kk_reloadData {
+    [self.kk_cellHeightCache.sections removeAllObjects];
+    
+    [self kk_reloadData];
+    
+}
+
+- (void)kk_insertSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation {
+    
+    [sections enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        if (idx < self.kk_cellHeightCache.sections.count) {
+            
+            [self.kk_cellHeightCache.sections insertObject:@[].mutableCopy atIndex:idx];
+        }
+    }];
+    
+    [self kk_insertSections:sections withRowAnimation:animation];
+}
+
+- (void)kk_deleteSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation {
+    
+    [sections enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        if (idx < self.kk_cellHeightCache.sections.count) {
+            
+            [self.kk_cellHeightCache.sections removeObjectAtIndex:idx];
+        }
+    }];
+    
+    [self kk_deleteSections:sections withRowAnimation:animation];
+}
+
+- (void)kk_reloadSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation {
+    
+    [sections enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        if (idx < self.kk_cellHeightCache.sections.count) {
+            NSMutableArray *rows = self.kk_cellHeightCache.sections[idx];
+            for (NSInteger row = 0; row < rows.count; row ++) {
+                rows[row] = @(_KKLayoutCellHeightCacheAbsentValue);
+            }
+        }
+    }];
+    
+    [self kk_reloadSections:sections withRowAnimation:animation];
+}
+
+- (void)kk_moveSection:(NSInteger)section toSection:(NSInteger)newSection {
+    
+    NSInteger sectionCount = self.kk_cellHeightCache.sections.count;
+    if (section < sectionCount && newSection < sectionCount) {
+        [self.kk_cellHeightCache.sections exchangeObjectAtIndex:section withObjectAtIndex:newSection];
+    }
+    
+    [self kk_moveSection:section toSection:newSection];
+}
+
+- (void)kk_insertRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation {
+    [self.kk_cellHeightCache buildHeightCacheAtIndexPaths:indexPaths];
+    [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath *indexPath, NSUInteger idx, BOOL *stop) {
+        NSMutableArray *rows = self.kk_cellHeightCache.sections[indexPath.section];
+        [rows insertObject:@(_KKLayoutCellHeightCacheAbsentValue) atIndex:indexPath.row];
+    }];
+    
+    [self kk_insertRowsAtIndexPaths:indexPaths withRowAnimation:animation];
+}
+
+- (void)kk_deleteRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation {
+    
+    [self kk_deleteRowsAtIndexPaths:indexPaths withRowAnimation:animation];
+}
+
+- (void)kk_reloadRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation {
+    
+    [self kk_reloadRowsAtIndexPaths:indexPaths withRowAnimation:animation];
+}
+
+@end
+
 #pragma mark -Public API: UITableView + KKLayoutCell
 
 @implementation UITableView (KKLayoutCell)

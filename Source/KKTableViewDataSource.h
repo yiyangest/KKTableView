@@ -9,15 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@class KKTableViewDataSource;
-
-@protocol MutliCellDataSource <NSObject>
-
-- (NSString *)tableViewDataSource: (KKTableViewDataSource *)dataSource identifierForIndexPath:(NSIndexPath *)indexPath;
-
-@end
 
 typedef void(^CellConfigureBlock)(id cell, id item);
+typedef Class(^CellClassConfigureBlock)(id item);
 
 /**
  *  UITableViewDataSource for only one section
@@ -26,10 +20,10 @@ typedef void(^CellConfigureBlock)(id cell, id item);
 
 @property (nonatomic, copy) NSString *cellIdentifier;
 @property (nonatomic, copy) CellConfigureBlock configureBlock;
-
-@property (nonatomic, weak) id<MutliCellDataSource> delegate;
+@property (nonatomic, copy) CellClassConfigureBlock cellClassConfigureBlock;
 
 - (instancetype)initWithIdentifier:(NSString *)identifier configureBlock:(CellConfigureBlock)block;
+- (void)registerConfigureBlock:(CellConfigureBlock)block forCellClassName:(NSString *)className;
 
 #pragma mark - 增、删数据源数组
 - (void)addItem:(id)item;

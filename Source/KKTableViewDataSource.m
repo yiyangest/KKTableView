@@ -7,10 +7,12 @@
 //
 
 #import "KKTableViewDataSource.h"
+#import "KKBaseCell.h"
 
 @interface KKTableViewDataSource ()
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableDictionary *configureBlocks;
 
 @end
 
@@ -56,6 +58,10 @@
     return [NSArray arrayWithArray:self.dataArray];
 }
 
+- (void)registerConfigureBlock:(CellConfigureBlock)block forCellClassName:(NSString *)className {
+    [self.configureBlocks setObject:[block copy] forKey:className];
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
@@ -64,13 +70,26 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *identifier = self.cellIdentifier;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(tableViewDataSource:identifierForIndexPath:)]) {
-        identifier = [self.delegate tableViewDataSource:self identifierForIndexPath:indexPath];
+    id item = [self itemAtIndexPath:indexPath];
+    
+    if (self.cellClassConfigureBlock) {
+        Class cellClass = self.cellClassConfigureBlock(item);
+        if ([cellClass isSubclassOfClass:[KKBaseCell class]]) {
+            identifier = [(id)cellClass performSelector:@selector(cellReuseIdentifier) withObject:nil];
+        } else {
+            identifier = NSStringFromClass(cellClass);
+        }
     }
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-    id item = [self itemAtIndexPath:indexPath];
-    self.configureBlock(cell, item);
+    CellConfigureBlock configureBlock = [self.configureBlocks objectForKey:identifier];
+    if (!configureBlock) {
+        configureBlock = self.configureBlock;
+    }
+    
+    NSAssert(configureBlock != nil, @"cell configure block is nil! Can't configure the cell with identifier: %@", identifier);
+    
+    configureBlock(cell, item);
     return cell;
 }
 
@@ -80,6 +99,13 @@
         _dataArray = [NSMutableArray new];
     }
     return _dataArray;
+}
+
+- (NSMutableDictionary *)configureBlocks {
+    if (_configureBlocks == nil) {
+        _configureBlocks = [NSMutableDictionary new];
+    }
+    return _configureBlocks;
 }
 
 @end
