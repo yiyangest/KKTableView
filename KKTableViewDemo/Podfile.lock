@@ -1,0 +1,13 @@
+PODS:
+  - Masonry (0.6.2)
+  - SVPullToRefresh (0.4.1)
+
+DEPENDENCIES:
+  - Masonry (~> 0.6.0)
+  - SVPullToRefresh
+
+SPEC CHECKSUMS:
+  Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
+
+COCOAPODS: 0.37.2
