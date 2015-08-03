@@ -4,6 +4,25 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
+        <!--Category View Controller-->
+        <scene sceneID="iuc-C7-5Qu">
+            <objects>
+                <viewController id="61e-Xw-7gy" customClass="CategoryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kAm-hN-ibQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="w2Y-O7-qHQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c5b-i0-eJR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="elv-Y2-1Gk"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jyp-wz-ga5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="760" y="-583"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -162,11 +181,22 @@
                                             <segue destination="UoM-Ww-DdJ" kind="push" id="NSb-mG-Nb4"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="47c-ON-Shw">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="gzq-7d-HbP" style="IBUITableViewCellStyleDefault" id="47c-ON-Shw">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="47c-ON-Shw" id="iy9-i8-1eb">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gzq-7d-HbP">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="61e-Xw-7gy" kind="push" id="3iy-Ug-Aty"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
