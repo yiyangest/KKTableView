@@ -50,6 +50,8 @@ typedef Class(^CellClassConfigureBlock)(id item);
 - (void)clearItems;
 
 #pragma mark - 只读类方法
+- (NSString *)cellIdentifierForIndexPath:(NSIndexPath *)indexPath;
+- (CellConfigureBlock)cellConfigureBlockForIdentifier:(NSString *)identifier;
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath;
 - (NSArray *)items;
 

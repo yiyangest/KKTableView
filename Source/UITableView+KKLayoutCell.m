@@ -276,7 +276,8 @@ static CGFloat const _KKLayoutCellHeightCacheAbsentValue = -1;
     
     KKTableViewDataSource *dataSource = self.dataSource;
     id item = [dataSource itemAtIndexPath:indexPath];
-    dataSource.configureBlock(cell, item);
+    CellConfigureBlock configureBlock = [dataSource cellConfigureBlockForIdentifier:identifier];
+    configureBlock(cell, item);
     
     CGSize cellSize = CGSizeZero;
     cellSize = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];

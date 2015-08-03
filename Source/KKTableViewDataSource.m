@@ -58,17 +58,7 @@
     return [NSArray arrayWithArray:self.dataArray];
 }
 
-- (void)registerConfigureBlock:(CellConfigureBlock)block forCellClassName:(NSString *)className {
-    [self.configureBlocks setObject:[block copy] forKey:className];
-}
-
-#pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (NSString *)cellIdentifierForIndexPath:(NSIndexPath *)indexPath {
     NSString *identifier = self.cellIdentifier;
     id item = [self itemAtIndexPath:indexPath];
     
@@ -80,6 +70,35 @@
             identifier = NSStringFromClass(cellClass);
         }
     }
+    
+    return identifier;
+
+}
+
+- (CellConfigureBlock)cellConfigureBlockForIdentifier:(NSString *)identifier {
+    CellConfigureBlock configureBlock = [self.configureBlocks objectForKey:identifier];
+    if (!configureBlock) {
+        configureBlock = self.configureBlock;
+    }
+    
+    return configureBlock;
+    
+}
+
+- (void)registerConfigureBlock:(CellConfigureBlock)block forCellClassName:(NSString *)className {
+    [self.configureBlocks setObject:[block copy] forKey:className];
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    id item = [self itemAtIndexPath:indexPath];
+    
+    NSString *identifier = [self cellIdentifierForIndexPath:indexPath];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     CellConfigureBlock configureBlock = [self.configureBlocks objectForKey:identifier];

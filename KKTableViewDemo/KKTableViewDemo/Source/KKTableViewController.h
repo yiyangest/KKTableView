@@ -9,20 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "KKPageInfo.h"
 #import "KKTableViewDataSource.h"
+#import "KKTableViewConstant.h"
 
-/**
- *  下拉刷新和加载更多的动画效果枚举
- */
-typedef NS_ENUM(NSUInteger, KKAnimStatus){
-    /**
-     *  开始动画
-     */
-    KKAnimStart = 1,
-    /**
-     *  结束动画
-     */
-    KKAnimStop
-};
 
 @interface KKTableViewController : UIViewController<UITableViewDelegate>
 
