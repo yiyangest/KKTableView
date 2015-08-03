@@ -10,8 +10,18 @@
 
 @interface KKBaseCell : UITableViewCell
 
+/**
+ *  返回cell的reuseIdentifier
+ *
+ *  @return <#return value description#>
+ */
 + (NSString *)cellReuseIdentifier;
 
+/**
+ *  返回cell对应的nib
+ *
+ *  @return <#return value description#>
+ */
 + (UINib *)nib;
 
 @end

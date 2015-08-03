@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  分页信息对象
+ */
 @interface KKPageInfo : NSObject
 
 @property(nonatomic)NSInteger           pageSize;

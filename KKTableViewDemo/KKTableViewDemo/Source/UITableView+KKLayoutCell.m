@@ -205,10 +205,34 @@ static CGFloat const _KKLayoutCellHeightCacheAbsentValue = -1;
 
 - (void)kk_deleteRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation {
     
+    [self.kk_cellHeightCache buildHeightCacheAtIndexPaths:indexPaths];
+    
+    NSMutableDictionary *indexPathsToRemove = @{}.mutableCopy;
+    [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath *indexPath, NSUInteger idx, BOOL *stop) {
+        NSMutableIndexSet *mutableIndexSet = indexPathsToRemove[@(indexPath.section)];
+        if (!mutableIndexSet) {
+            indexPathsToRemove[@(indexPath.section)] = [NSMutableIndexSet indexSet];
+        }
+        
+        [mutableIndexSet addIndex:indexPath.row];
+    }];
+    
+    [indexPathsToRemove enumerateKeysAndObjectsUsingBlock:^(NSNumber *key, NSIndexSet *indexSet, BOOL *stop) {
+        NSMutableArray *rows = self.kk_cellHeightCache.sections[key.integerValue];
+        [rows removeObjectsAtIndexes:indexSet];
+    }];
+    
     [self kk_deleteRowsAtIndexPaths:indexPaths withRowAnimation:animation];
 }
 
 - (void)kk_reloadRowsAtIndexPaths:(NSArray *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation {
+    
+    [self.kk_cellHeightCache buildHeightCacheAtIndexPaths:indexPaths];
+    [indexPaths enumerateObjectsUsingBlock:^(NSIndexPath *indexPath, NSUInteger idx, BOOL *stop) {
+        NSMutableArray *rows = self.kk_cellHeightCache.sections[indexPath.section];
+        
+        rows[indexPath.row] = @(_KKLayoutCellHeightCacheAbsentValue);
+    }];
     
     [self kk_reloadRowsAtIndexPaths:indexPaths withRowAnimation:animation];
 }
@@ -260,8 +284,6 @@ static CGFloat const _KKLayoutCellHeightCacheAbsentValue = -1;
     if (self.separatorStyle != UITableViewCellSeparatorStyleNone) {
         cellSize.height += 1.0 / [UIScreen mainScreen].scale;
     }
-    
-    NSLog(@"caculate cell height for IndexPath: %@", @(indexPath.row));
     
     return cellSize.height;
 }
