@@ -11,33 +11,43 @@
 
 #import "PersonCollectionCell.h"
 #import "Person.h"
+#import "UIViewController+KKDataView.h"
+
+@interface DemoCollectionViewController ()<KKDataViewControllerDelegate>
+
+@end
 
 @implementation DemoCollectionViewController
+
+- (void)loadView {
+    [super loadView];
+    
+    [self kk_loadWithDataViewType:KKDataViewTypeCollectionView];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addSubview:self.collectionView];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
-    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view addSubview:self.kk_collectionView];
+    
+    [self.kk_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_topLayoutGuide);
         make.bottom.equalTo(self.mas_bottomLayoutGuide);
         make.leading.equalTo(self.view);
         make.trailing.equalTo(self.view);
     }];
     
-    [self refresh];
+    [self requestForData];
+    
 }
 
-- (void)refresh {
-    [super refresh];
-    
+- (void)kk_dataViewWillRefresh {
     [self requestForData];
 }
 
-- (void)loadMore {
-    [super loadMore];
-    
+- (void)kk_dataViewWillLoadMore {
     [self requestForData];
 }
 
@@ -54,34 +64,30 @@
         [array addObject:person];
     }
     
-    if (self.pageInfo.currentPage == 1) {
-        [self.dataSource clearItems];
+    if (self.kk_pageInfo.currentPage == 1) {
+        [self.kk_dataSource clearItems];
     }
     
-    [self.dataSource addItemsArray:array];
+    [self.kk_dataSource addItemsArray:array];
     
-    [self collectionViewInfiniteScrollingWithStatus:KKAnimStop];
-    [self collectionViewPullToRefreshViewWithStatus:KKAnimStop];
+    [self kk_dataViewInfiniteScrollingWithStatus:KKAnimStop];
+    [self kk_dataViewPullToRefreshViewWithStatus:KKAnimStop];
     
-    [self reloadCollectionViewData];
+    [self kk_reloadViewData];
 }
 
-- (void)configureCollectionView {
-    [super configureCollectionView];
-    
-    
-    [self.collectionView registerClass:[PersonCollectionCell class] forCellWithReuseIdentifier:NSStringFromClass([PersonCollectionCell class])];
+- (void)kk_dataViewDidConfigureDataView {
+    [self.kk_collectionView registerClass:[PersonCollectionCell class] forCellWithReuseIdentifier:NSStringFromClass([PersonCollectionCell class])];
     
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
     layout.itemSize = CGSizeMake(100, 80);
-    self.collectionView.collectionViewLayout = layout;
+    self.kk_collectionView.collectionViewLayout = layout;
 }
 
-- (void)configureDataSource {
-    [super configureDataSource];
+- (void)kk_dataViewDidConfigureDataSource {
     
-    self.dataSource.cellIdentifier = NSStringFromClass([PersonCollectionCell class]);
-    self.dataSource.configureBlock = ^(PersonCollectionCell *cell, Person *model) {
+    self.kk_dataSource.cellIdentifier = NSStringFromClass([PersonCollectionCell class]);
+    self.kk_dataSource.configureBlock = ^(PersonCollectionCell *cell, Person *model) {
         [cell configureWithPerson:model];
     };
 }

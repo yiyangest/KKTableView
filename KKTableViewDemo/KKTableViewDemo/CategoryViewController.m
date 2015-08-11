@@ -7,14 +7,14 @@
 //
 
 #import "CategoryViewController.h"
-#import "UIViewController+KKTableView.h"
+#import "UIViewController+KKDataView.h"
 #import "Masonry.h"
 #import "PersonCell.h"
 #import "RightCell.h"
 #import "Person.h"
 #import "UITableView+KKLayoutCell.h"
 
-@interface CategoryViewController ()<KKTableViewControllerDelegate, UITableViewDelegate>
+@interface CategoryViewController ()<KKDataViewControllerDelegate, UITableViewDelegate>
 
 @end
 
@@ -23,16 +23,21 @@
 - (void)loadView {
     [super loadView];
     
-    [self kk_loadView];
+    [self kk_loadWithDataViewType:KKDataViewTypeTableView];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     [self.view addSubview:self.kk_tableView];
     
     [self.kk_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.top.equalTo(self.mas_topLayoutGuide);
+        make.bottom.equalTo(self.mas_bottomLayoutGuide);
+        make.leading.equalTo(self.view);
+        make.trailing.equalTo(self.view);
     }];
     
     [self kk_refresh];
@@ -43,12 +48,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)kk_tableViewWillRefresh {
+- (void)kk_dataViewWillRefresh {
     NSLog(@"vc refresh");
     [self requestForData];
 }
 
-- (void)kk_tableViewWillLoadMore {
+- (void)kk_dataViewWillLoadMore {
     NSLog(@"vc load more");
     [self requestForData];
 }
@@ -72,20 +77,23 @@
     
     [self.kk_dataSource addItemsArray:array];
     
-    [self kk_tableViewInfiniteScrollingWithStatus:KKAnimStop];
-    [self kk_tableViewPullToRefreshViewWithStatus:KKAnimStop];
+    [self kk_dataViewInfiniteScrollingWithStatus:KKAnimStop];
+    [self kk_dataViewPullToRefreshViewWithStatus:KKAnimStop];
     
-    [self kk_reloadTableData];
+    [self kk_reloadViewData];
 }
 
 
-- (void)kk_tableViewDidConfigureTableView {
+- (void)kk_dataViewDidConfigureDataView {
+    
+//    self.kk_tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     [self.kk_tableView kk_registerCellClass:[PersonCell class]];
     
     [self.kk_tableView kk_registerCellClass:[RightCell class]];
 }
 
-- (void)kk_tableViewDidConfigureDataSource {
+- (void)kk_dataViewDidConfigureDataSource {
     self.kk_dataSource.cellClassConfigureBlock = ^(Person *model) {
         if (model.userno % 3 == 0) {
             return [RightCell class];

@@ -8,6 +8,6 @@
 
 #import "KKCollectionViewController.h"
 
-@interface DemoCollectionViewController : KKCollectionViewController
+@interface DemoCollectionViewController : UIViewController
 
 @end
