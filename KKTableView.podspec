@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "KKTableView"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "Lighter view controllers."
 
   s.description  = <<-DESC
