@@ -24,5 +24,11 @@ typedef NS_ENUM(NSUInteger, KKAnimStatus){
     KKAnimStop
 };
 
+typedef NS_ENUM(NSUInteger, KKDataViewType) {
+    KKDataViewTypeTableView = 1,
+    
+    KKDataViewTypeCollectionView
+};
+
 
 #endif

@@ -112,6 +112,28 @@
     return cell;
 }
 
+#pragma mark - UICollectionViewDataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.dataArray.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    id item = [self itemAtIndexPath:indexPath];
+    
+    NSString *identifier = [self cellIdentifierForIndexPath:indexPath];
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    CellConfigureBlock configureBlock = [self.configureBlocks objectForKey:identifier];
+    if (!configureBlock) {
+        configureBlock = self.configureBlock;
+    }
+    
+    NSAssert(configureBlock != nil, @"cell configure block is nil! Can't configure the cell with identifier: %@", identifier);
+    
+    configureBlock(cell, item);
+    return cell;
+}
+
 #pragma mark - Getter & Setter
 - (NSMutableArray *)dataArray {
     if (_dataArray == nil) {
