@@ -1,6 +1,6 @@
 # KKTableView
 
-对于需要使用UITableView来展示一些列表数据的ViewController进行了封装，减轻ViewController的负担。
+对于需要使用~~UITableView~~UITableView或者UICollectionView（版本`0.0.3`已更新到对UICollectionView的支持）来展示一些列表数据的ViewController进行了封装，减轻ViewController的负担。
 
 ## Installation
 
@@ -81,22 +81,28 @@
 	
 KKTableView遵循约定优于配置的原则，cell的identifier与classname保持一致。KKBaseCell的cellReuseIdentifier方法就是按照这个原则实现的。
 
-### 使用UIViewController+KKTableView的Category
+对于使用UICollectionView的ViewController可以继承KKCollectionViewController, 使用方法基本一样。
 
-当然，有时候我们的工程里面，已经有一个抽象出来的BaseViewController作为其他ViewController实现的基类，这时候子类化KKTableViewController似乎就不太实用了，不过你仍然可以通过UIViewController+KKTableView这个category来减轻VC的负担，当然也会需要你做一些额外的事情来配合。
+### 使用UIViewController+KKDataView的Category
 
-首先，你需要遵循KKTableViewControllerDelegate这个协议(当然你可以在extension里面表明遵循这个protocol)：
+*注意版本`0.0.3`之前的UIViewController+KKTableView的Category已经改名为UIViewController+KKDataView。*
 
-	@interface CategoryViewController ()<KKTableViewControllerDelegate>
+当然，有时候我们的工程里面，已经有一个抽象出来的BaseViewController作为其他ViewController实现的基类，这时候子类化KKTableViewController似乎就不太实用了，不过你仍然可以通过UIViewController+KKDataView这个category来减轻VC的负担，当然也会需要你做一些额外的事情来配合。
+
+首先，你需要遵循KKDataViewControllerDelegate这个协议(当然你可以在extension里面表明遵循这个protocol)：
+
+	@interface CategoryViewController ()<KKDataViewControllerDelegate>
 	@end
 	
-然后在合适的位置(比如在loadView里)调用kk_loadView来初始化tableView和datasource的基本配置：
+然后在合适的位置(比如在loadView里)调用`kk_loadWithDataViewType`来初始化tableView和datasource的基本配置：
 
 	- (void)loadView {
 		[super loadView];
 		
-		[self kk_loadView];
+		[self kk_loadWithDataViewType:KKDataViewTypeTableView];
 	}
+`KKDataViewType`是一个枚举，包含tableView和collectionView两种。
+之后，你就可以通过self.kk_collectionView或者self.kk_tableView来获取相应的view了。
 	
 接下来：
 
@@ -111,17 +117,17 @@ KKTableView遵循约定优于配置的原则，cell的identifier与classname保�
 	#pragma mark - 实现KKTableViewControllerDelegate
 	
 	// 下拉刷新时需要处理的业务
-	- (void)kk_tableViewWillRefresh {
+	- (void)kk_dataViewWillRefresh {
 		// 发起网络请求
 	}
 	
 	// 加载更多时需要处理的业务
-	- (void)kk_tableViewWillLoadMore {
+	- (void)kk_dataViewWillLoadMore {
 		// 发起网络请求
 	}
 	
 	// 配置tableView
-	- (void)kk_tableViewDidConfigureTableView {
+	- (void)kk_dataViewDidConfigureDataView {
 		// 给tableView注册相应的cell
 		[self.kk_tableView registerCell....];
 		
@@ -130,7 +136,7 @@ KKTableView遵循约定优于配置的原则，cell的identifier与classname保�
 
 	}
 	
-	- (void)kk_tableViewDidConfigureDataSource {
+	- (void)kk_dataViewDidConfigureDataSource {
 		// 如果有子类化的KKTableViewDataSource，可以在此处对self.dataSource进行初始化
 		// self.kk_dataSource = [MultiDataSource new];
 		
@@ -151,4 +157,6 @@ KKTableView遵循约定优于配置的原则，cell的identifier与classname保�
 		} forCellClassName:@"PersonCell"];
 	}
 	
+## 说明
 
+可以参考[这篇博客](http://yiyangest.sinaapp.com/post/lighter-view-controller-practice)
