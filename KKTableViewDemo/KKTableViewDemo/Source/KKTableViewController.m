@@ -64,7 +64,7 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    KKTableViewController *__weak weakSelf = self;
+    __weak __typeof(&*self)weakSelf = self;
     
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refresh];

@@ -16,7 +16,7 @@ typedef Class(^CellClassConfigureBlock)(id item);
 /**
  *  UITableViewDataSource for only one section
  */
-@interface KKTableViewDataSource : NSObject<UITableViewDataSource>
+@interface KKTableViewDataSource : NSObject<UITableViewDataSource, UICollectionViewDataSource>
 
 @property (nonatomic, copy) NSString *cellIdentifier;
 @property (nonatomic, copy) CellConfigureBlock configureBlock;
