@@ -25,7 +25,6 @@
 		A56D21391B79EF6400517B12 /* KKTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A56D212E1B79EF6400517B12 /* KKTableViewDataSource.m */; };
 		A56D213A1B79EF6400517B12 /* UITableView+KKLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56D21301B79EF6400517B12 /* UITableView+KKLayoutCell.m */; };
 		A56D213B1B79EF6400517B12 /* UIViewController+KKDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = A56D21321B79EF6400517B12 /* UIViewController+KKDataView.m */; };
-		A56D213C1B79EF6400517B12 /* UIViewController+KKTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A56D21341B79EF6400517B12 /* UIViewController+KKTableView.m */; };
 		A5815F3C1B6B812800DE8A7B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5815F3B1B6B812800DE8A7B /* main.m */; };
 		A5815F3F1B6B812800DE8A7B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5815F3E1B6B812800DE8A7B /* AppDelegate.m */; };
 		A5815F421B6B812800DE8A7B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5815F411B6B812800DE8A7B /* ViewController.m */; };
@@ -83,8 +82,6 @@
 		A56D21301B79EF6400517B12 /* UITableView+KKLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+KKLayoutCell.m"; sourceTree = "<group>"; };
 		A56D21311B79EF6400517B12 /* UIViewController+KKDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KKDataView.h"; sourceTree = "<group>"; };
 		A56D21321B79EF6400517B12 /* UIViewController+KKDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KKDataView.m"; sourceTree = "<group>"; };
-		A56D21331B79EF6400517B12 /* UIViewController+KKTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KKTableView.h"; sourceTree = "<group>"; };
-		A56D21341B79EF6400517B12 /* UIViewController+KKTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KKTableView.m"; sourceTree = "<group>"; };
 		A5815F361B6B812800DE8A7B /* KKTableViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKTableViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5815F3A1B6B812800DE8A7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5815F3B1B6B812800DE8A7B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -147,8 +144,6 @@
 				A56D21301B79EF6400517B12 /* UITableView+KKLayoutCell.m */,
 				A56D21311B79EF6400517B12 /* UIViewController+KKDataView.h */,
 				A56D21321B79EF6400517B12 /* UIViewController+KKDataView.m */,
-				A56D21331B79EF6400517B12 /* UIViewController+KKTableView.h */,
-				A56D21341B79EF6400517B12 /* UIViewController+KKTableView.m */,
 			);
 			name = Source;
 			path = ../../Source;
@@ -394,7 +389,6 @@
 				A56D21361B79EF6400517B12 /* KKCollectionViewController.m in Sources */,
 				A54CD79C1B6B83D3004DBF98 /* PersonCell.m in Sources */,
 				A54CD7AF1B6B8443004DBF98 /* RightCell.m in Sources */,
-				A56D213C1B79EF6400517B12 /* UIViewController+KKTableView.m in Sources */,
 				A56D21371B79EF6400517B12 /* KKPageInfo.m in Sources */,
 				A56D213A1B79EF6400517B12 /* UITableView+KKLayoutCell.m in Sources */,
 				A54CD7991B6B83D3004DBF98 /* FDFeedEntity.m in Sources */,
