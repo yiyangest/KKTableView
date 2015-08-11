@@ -11,7 +11,7 @@
 		A544353C1B798B8800D73E26 /* KKCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A544353B1B798B8800D73E26 /* KKCollectionViewController.m */; };
 		A544353F1B79944C00D73E26 /* DemoCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A544353E1B79944C00D73E26 /* DemoCollectionViewController.m */; };
 		A54435421B79AC7600D73E26 /* PersonCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A54435411B79AC7600D73E26 /* PersonCollectionCell.m */; };
-		A54A19061B6F3AE000199FCB /* UIViewController+KKTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A54A19051B6F3AE000199FCB /* UIViewController+KKTableView.m */; };
+		A54435451B79C56300D73E26 /* UIViewController+KKDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = A54435441B79C56300D73E26 /* UIViewController+KKDataView.m */; };
 		A54A190A1B6F426100199FCB /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A54A19091B6F426100199FCB /* CategoryViewController.m */; };
 		A54CD7971B6B83D3004DBF98 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = A54CD78C1B6B83D3004DBF98 /* data.json */; };
 		A54CD7981B6B83D3004DBF98 /* FDFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A54CD78E1B6B83D3004DBF98 /* FDFeedCell.m */; };
@@ -53,8 +53,9 @@
 		A544353E1B79944C00D73E26 /* DemoCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoCollectionViewController.m; sourceTree = "<group>"; };
 		A54435401B79AC7600D73E26 /* PersonCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCollectionCell.h; sourceTree = "<group>"; };
 		A54435411B79AC7600D73E26 /* PersonCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCollectionCell.m; sourceTree = "<group>"; };
-		A54A19041B6F3AE000199FCB /* UIViewController+KKTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KKTableView.h"; sourceTree = "<group>"; };
-		A54A19051B6F3AE000199FCB /* UIViewController+KKTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KKTableView.m"; sourceTree = "<group>"; };
+		A54435431B79C56300D73E26 /* UIViewController+KKDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KKDataView.h"; sourceTree = "<group>"; };
+		A54435441B79C56300D73E26 /* UIViewController+KKDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KKDataView.m"; sourceTree = "<group>"; };
+		A54435461B79C5ED00D73E26 /* KKDataViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKDataViewControllerDelegate.h; sourceTree = "<group>"; };
 		A54A19071B6F3BD900199FCB /* KKTableViewConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKTableViewConstant.h; sourceTree = "<group>"; };
 		A54A19081B6F426100199FCB /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
 		A54A19091B6F426100199FCB /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
@@ -137,11 +138,12 @@
 				A54CD7A51B6B8419004DBF98 /* KKTableViewDataSource.m */,
 				A54CD7A61B6B8419004DBF98 /* UITableView+KKLayoutCell.h */,
 				A54CD7A71B6B8419004DBF98 /* UITableView+KKLayoutCell.m */,
-				A54A19041B6F3AE000199FCB /* UIViewController+KKTableView.h */,
-				A54A19051B6F3AE000199FCB /* UIViewController+KKTableView.m */,
 				A54A19071B6F3BD900199FCB /* KKTableViewConstant.h */,
 				A544353A1B798B8800D73E26 /* KKCollectionViewController.h */,
 				A544353B1B798B8800D73E26 /* KKCollectionViewController.m */,
+				A54435431B79C56300D73E26 /* UIViewController+KKDataView.h */,
+				A54435441B79C56300D73E26 /* UIViewController+KKDataView.m */,
+				A54435461B79C5ED00D73E26 /* KKDataViewControllerDelegate.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -379,13 +381,13 @@
 				A54CD7981B6B83D3004DBF98 /* FDFeedCell.m in Sources */,
 				A54CD7AA1B6B8419004DBF98 /* KKTableViewController.m in Sources */,
 				A54435421B79AC7600D73E26 /* PersonCollectionCell.m in Sources */,
+				A54435451B79C56300D73E26 /* UIViewController+KKDataView.m in Sources */,
 				A54CD79B1B6B83D3004DBF98 /* Person.m in Sources */,
 				A5815F3F1B6B812800DE8A7B /* AppDelegate.m in Sources */,
 				A54CD7AB1B6B8419004DBF98 /* KKTableViewDataSource.m in Sources */,
 				A5815F3C1B6B812800DE8A7B /* main.m in Sources */,
 				A544353C1B798B8800D73E26 /* KKCollectionViewController.m in Sources */,
 				A544353F1B79944C00D73E26 /* DemoCollectionViewController.m in Sources */,
-				A54A19061B6F3AE000199FCB /* UIViewController+KKTableView.m in Sources */,
 				A54CD79A1B6B83D3004DBF98 /* FeedViewController.m in Sources */,
 				A54CD79C1B6B83D3004DBF98 /* PersonCell.m in Sources */,
 				A54CD7A91B6B8419004DBF98 /* KKPageInfo.m in Sources */,
