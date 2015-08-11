@@ -274,7 +274,7 @@ static CGFloat const _KKLayoutCellHeightCacheAbsentValue = -1;
     
     [cell prepareForReuse];
     
-    KKTableViewDataSource *dataSource = self.dataSource;
+    KKTableViewDataSource *dataSource = (KKTableViewDataSource *)self.dataSource;
     id item = [dataSource itemAtIndexPath:indexPath];
     CellConfigureBlock configureBlock = [dataSource cellConfigureBlockForIdentifier:identifier];
     configureBlock(cell, item);
