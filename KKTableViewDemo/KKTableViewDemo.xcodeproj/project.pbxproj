@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1534DF23763B6DEAACC4FC0D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01220BE04A2553FAA8E9760D /* libPods.a */; };
+		A544353C1B798B8800D73E26 /* KKCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A544353B1B798B8800D73E26 /* KKCollectionViewController.m */; };
+		A544353F1B79944C00D73E26 /* DemoCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A544353E1B79944C00D73E26 /* DemoCollectionViewController.m */; };
+		A54435421B79AC7600D73E26 /* PersonCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A54435411B79AC7600D73E26 /* PersonCollectionCell.m */; };
 		A54A19061B6F3AE000199FCB /* UIViewController+KKTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A54A19051B6F3AE000199FCB /* UIViewController+KKTableView.m */; };
 		A54A190A1B6F426100199FCB /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A54A19091B6F426100199FCB /* CategoryViewController.m */; };
 		A54CD7971B6B83D3004DBF98 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = A54CD78C1B6B83D3004DBF98 /* data.json */; };
@@ -44,6 +47,12 @@
 /* Begin PBXFileReference section */
 		01220BE04A2553FAA8E9760D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1069D0400E69879CE7F9D5D9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A544353A1B798B8800D73E26 /* KKCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKCollectionViewController.h; sourceTree = "<group>"; };
+		A544353B1B798B8800D73E26 /* KKCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKCollectionViewController.m; sourceTree = "<group>"; };
+		A544353D1B79944C00D73E26 /* DemoCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoCollectionViewController.h; sourceTree = "<group>"; };
+		A544353E1B79944C00D73E26 /* DemoCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoCollectionViewController.m; sourceTree = "<group>"; };
+		A54435401B79AC7600D73E26 /* PersonCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCollectionCell.h; sourceTree = "<group>"; };
+		A54435411B79AC7600D73E26 /* PersonCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCollectionCell.m; sourceTree = "<group>"; };
 		A54A19041B6F3AE000199FCB /* UIViewController+KKTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KKTableView.h"; sourceTree = "<group>"; };
 		A54A19051B6F3AE000199FCB /* UIViewController+KKTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KKTableView.m"; sourceTree = "<group>"; };
 		A54A19071B6F3BD900199FCB /* KKTableViewConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKTableViewConstant.h; sourceTree = "<group>"; };
@@ -131,6 +140,8 @@
 				A54A19041B6F3AE000199FCB /* UIViewController+KKTableView.h */,
 				A54A19051B6F3AE000199FCB /* UIViewController+KKTableView.m */,
 				A54A19071B6F3BD900199FCB /* KKTableViewConstant.h */,
+				A544353A1B798B8800D73E26 /* KKCollectionViewController.h */,
+				A544353B1B798B8800D73E26 /* KKCollectionViewController.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -182,6 +193,10 @@
 				A5815F391B6B812800DE8A7B /* Supporting Files */,
 				A54A19081B6F426100199FCB /* CategoryViewController.h */,
 				A54A19091B6F426100199FCB /* CategoryViewController.m */,
+				A544353D1B79944C00D73E26 /* DemoCollectionViewController.h */,
+				A544353E1B79944C00D73E26 /* DemoCollectionViewController.m */,
+				A54435401B79AC7600D73E26 /* PersonCollectionCell.h */,
+				A54435411B79AC7600D73E26 /* PersonCollectionCell.m */,
 			);
 			path = KKTableViewDemo;
 			sourceTree = "<group>";
@@ -363,10 +378,13 @@
 				A5815F421B6B812800DE8A7B /* ViewController.m in Sources */,
 				A54CD7981B6B83D3004DBF98 /* FDFeedCell.m in Sources */,
 				A54CD7AA1B6B8419004DBF98 /* KKTableViewController.m in Sources */,
+				A54435421B79AC7600D73E26 /* PersonCollectionCell.m in Sources */,
 				A54CD79B1B6B83D3004DBF98 /* Person.m in Sources */,
 				A5815F3F1B6B812800DE8A7B /* AppDelegate.m in Sources */,
 				A54CD7AB1B6B8419004DBF98 /* KKTableViewDataSource.m in Sources */,
 				A5815F3C1B6B812800DE8A7B /* main.m in Sources */,
+				A544353C1B798B8800D73E26 /* KKCollectionViewController.m in Sources */,
+				A544353F1B79944C00D73E26 /* DemoCollectionViewController.m in Sources */,
 				A54A19061B6F3AE000199FCB /* UIViewController+KKTableView.m in Sources */,
 				A54CD79A1B6B83D3004DBF98 /* FeedViewController.m in Sources */,
 				A54CD79C1B6B83D3004DBF98 /* PersonCell.m in Sources */,
