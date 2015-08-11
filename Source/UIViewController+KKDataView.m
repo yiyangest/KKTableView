@@ -80,6 +80,10 @@ static const char *kk_data_view;
     
     self.kk_dataView.backgroundColor = [UIColor clearColor];
     
+    if (self.kk_dataViewType == KKDataViewTypeTableView) {
+        self.kk_tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
     __weak typeof(&*self)weakSelf = self;
     
     [self.kk_dataView addPullToRefreshWithActionHandler:^{
