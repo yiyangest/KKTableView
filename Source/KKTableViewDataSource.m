@@ -63,12 +63,7 @@
     id item = [self itemAtIndexPath:indexPath];
     
     if (self.cellClassConfigureBlock) {
-        Class cellClass = self.cellClassConfigureBlock(item);
-        if ([cellClass isSubclassOfClass:[KKBaseCell class]]) {
-            identifier = [(id)cellClass performSelector:@selector(cellReuseIdentifier) withObject:nil];
-        } else {
-            identifier = NSStringFromClass(cellClass);
-        }
+        identifier = self.cellClassConfigureBlock(item);
     }
     
     return identifier;
@@ -85,8 +80,8 @@
     
 }
 
-- (void)registerConfigureBlock:(CellConfigureBlock)block forCellClassName:(NSString *)className {
-    [self.configureBlocks setObject:[block copy] forKey:className];
+- (void)registerConfigureBlock:(CellConfigureBlock)block forIdentifier:(NSString *)identifier {
+    [self.configureBlocks setObject:[block copy] forKey:identifier];
 }
 
 #pragma mark - UITableViewDataSource

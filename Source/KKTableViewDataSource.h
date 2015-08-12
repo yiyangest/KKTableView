@@ -11,7 +11,7 @@
 
 
 typedef void(^CellConfigureBlock)(id cell, id item);
-typedef Class(^CellClassConfigureBlock)(id item);
+typedef NSString *(^CellIdentifierConfigureBlock)(id item);
 
 /**
  *  UITableViewDataSource for only one section
@@ -24,7 +24,7 @@ typedef Class(^CellClassConfigureBlock)(id item);
 /**
  * 配置cell类别和item之间关系的block
  */
-@property (nonatomic, copy) CellClassConfigureBlock cellClassConfigureBlock;
+@property (nonatomic, copy) CellIdentifierConfigureBlock cellClassConfigureBlock;
 
 /**
  *  通过cell的identifier和配置方法初始化dataSource，通常用于单一类别cell的dataSource
@@ -40,9 +40,9 @@ typedef Class(^CellClassConfigureBlock)(id item);
  *  注册绑定cell配置方法和cell类，如table有多种cell，则可调用多次该方法注册各个cell类别
  *
  *  @param block     cell对应的配置方法
- *  @param className cell的类名
+ *  @param className cell的identifier
  */
-- (void)registerConfigureBlock:(CellConfigureBlock)block forCellClassName:(NSString *)className;
+- (void)registerConfigureBlock:(CellConfigureBlock)block forIdentifier:(NSString *)identifier;
 
 #pragma mark - 增、删数据源数组
 - (void)addItem:(id)item;
