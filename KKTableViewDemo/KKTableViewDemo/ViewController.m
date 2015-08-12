@@ -91,19 +91,19 @@
     // 设置多种类型cell的配置条件
     self.dataSource.cellClassConfigureBlock = ^(Person *model) {
         if (model.userno % 3 == 0) {
-            return [RightCell class];
+            return [RightCell cellReuseIdentifier];
         }
-        return [PersonCell class];
+        return [PersonCell cellReuseIdentifier];
     };
     
     // 注册多种cell的configureBlock
     [self.dataSource registerConfigureBlock:^(PersonCell *cell, Person *item) {
         [cell configureWithPerson:item];
-    } forCellClassName:@"PersonCell"];
+    } forIdentifier:@"PersonCell"];
     
     [self.dataSource registerConfigureBlock:^(RightCell *cell, Person *item) {
         [cell configureWithPerson:item];
-    } forCellClassName:@"RightCell"];
+    } forIdentifier:@"RightCell"];
     
 }
 

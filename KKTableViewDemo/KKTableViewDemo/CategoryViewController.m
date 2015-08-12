@@ -96,18 +96,18 @@
 - (void)kk_dataViewDidConfigureDataSource {
     self.kk_dataSource.cellClassConfigureBlock = ^(Person *model) {
         if (model.userno % 3 == 0) {
-            return [RightCell class];
+            return [RightCell cellReuseIdentifier];
         }
-        return [PersonCell class];
+        return [PersonCell cellReuseIdentifier];
     };
     
     [self.kk_dataSource registerConfigureBlock:^(PersonCell *cell, Person *item) {
         [cell configureWithPerson:item];
-    } forCellClassName:@"PersonCell"];
+    } forIdentifier:@"PersonCell"];
     
     [self.kk_dataSource registerConfigureBlock:^(RightCell *cell, Person *item) {
         [cell configureWithPerson:item];
-    } forCellClassName:@"RightCell"];
+    } forIdentifier:@"RightCell"];
 }
 
 /*
