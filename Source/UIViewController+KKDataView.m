@@ -47,19 +47,12 @@ static const char *kk_data_view;
 
 
 - (UIScrollView *)kk_dataView {
-    UIScrollView *dataView = objc_getAssociatedObject(self, &kk_data_view);
-    if (!dataView) {
-        switch (self.kk_dataViewType) {
-            case KKDataViewTypeCollectionView:
-                dataView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[UICollectionViewFlowLayout new]];
-                break;
-            case KKDataViewTypeTableView:
-                dataView = [UITableView new];
-                break;
-        }
-        objc_setAssociatedObject(self, &kk_data_view, dataView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    switch (self.kk_dataViewType) {
+        case KKDataViewTypeCollectionView:
+            return [self kk_collectionView];
+        case KKDataViewTypeTableView:
+            return [self kk_tableView];
     }
-    return dataView;
 }
 
 @end
@@ -103,7 +96,6 @@ static const char *kk_data_view;
 
 - (void)kk_refresh {
     self.kk_pageInfo.currentPage = 1;
-    NSLog(@"vc category refresh");
     if (self.kk_delegate && [self.kk_delegate respondsToSelector:@selector(kk_dataViewWillRefresh)]) {
         [self.kk_delegate kk_dataViewWillRefresh];
     }
